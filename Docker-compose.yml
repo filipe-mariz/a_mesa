@@ -1,0 +1,64 @@
+version: '3'
+services:
+    nginx:
+        build:
+            dockerfile: ./docker/nginx.dockerfile
+            context: .
+        image: filipemariz/nginx
+        container_name: nginx
+        ports:
+            - "3333:8080"
+        networks:
+            - production-network
+        depends_on:
+            - "node1"
+            - "node2"
+            - "node3"
+
+    mongodb:
+        image: mongo
+        networks:
+            - production-network
+
+    node1:
+        build:
+            dockerfile: ./docker/filipe.dockerfile
+            context: .
+        image: filipemariz/server-test
+        container_name: server-test-1
+        ports:
+            - "3000"
+        networks:
+            - production-network
+        depends_on:
+            - "mongodb"
+
+    node2:
+        build:
+            dockerfile: ./docker/filipe.dockerfile
+            context: .
+        image: filipemariz/server-test
+        container_name: server-test-2
+        ports:
+            - "3000"
+        networks:
+            - production-network
+        depends_on:
+            - "mongodb"
+
+    node3:
+        build:
+            dockerfile: ./docker/filipe.dockerfile
+            context: .
+        image: filipemariz/server-test
+        container_name: server-test-3
+        ports:
+            - "3000"
+        networks:
+            - production-network
+        depends_on:
+            - "mongodb"
+
+networks:
+    production-network:
+        driver: bridge

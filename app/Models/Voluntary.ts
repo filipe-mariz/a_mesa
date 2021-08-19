@@ -1,0 +1,48 @@
+//import uuid from 'uuid/v4'
+import Hash from '@ioc:Adonis/Core/Hash'
+import { DateTime } from 'luxon'
+import { BaseModel, column, beforeCreate, beforeSave } from '@ioc:Adonis/Lucid/Orm'
+
+export default class Voluntary extends BaseModel {
+  public static connection = 'pg'
+  public static selfAssignPrimaryKey = true
+
+  @column({ isPrimary: true })
+  public id: number
+
+  @column()
+  public name: string
+
+  @column()
+  public email: string
+
+  @column()
+  public password: string
+ 
+  @column()
+  public cpf: string
+
+  @column()
+  public phone: string
+
+  @column()
+  public help_type: string
+
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  public updatedAt: DateTime
+
+  /* @beforeCreate()
+  public static assignUuid(voluntary: Voluntary) {
+    voluntary.id = uuid()
+  } */
+
+  @beforeSave()
+  public static async hashPassword(voluntary: Voluntary) {
+    if (voluntary.$dirty.password) {
+      voluntary.password = await Hash.hash(voluntary.password)
+    }
+  }
+}
