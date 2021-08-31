@@ -47,4 +47,12 @@ export default class VolunteersController {
 
     return volunteer
   }
+
+  public async show({ request, params }) {
+    Volunteer.connection = request.tenantConnection;
+
+    const volunteer = await Volunteer.findOrFail(params.volunteer_id)
+
+    return volunteer
+  }
 }
