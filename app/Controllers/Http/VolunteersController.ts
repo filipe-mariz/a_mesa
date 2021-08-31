@@ -55,4 +55,18 @@ export default class VolunteersController {
 
     return volunteer
   }
+
+  public async update({ request, params }) {
+    Volunteer.connection = request.tenantConnection;
+
+    const data = request.except([ 'passwordConfirmation' ]);
+
+    const volunteer = await Volunteer.findOrFail(params.volunteer_id);
+
+    volunteer.merge(data);
+
+    await volunteer.save();
+
+    return volunteer;
+  }
 }
