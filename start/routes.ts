@@ -6,10 +6,11 @@ Route.get('/', async () => {
 
 Route.group(() => {
   Route.group(() => {
-    Route.get('/', 'VolunteersController.index')
-    Route.post('/', 'VolunteersController.register')
-    Route.get('/:volunteer_id', 'VolunteersController.show')
-    Route.put('/:volunteer_id', 'VolunteersController.update')
+    Route.get('/', 'VolunteersController.index');
+    Route.post('/', 'VolunteersController.register');
+    Route.get('/:volunteer_id', 'VolunteersController.show');
+    Route.put('/:volunteer_id', 'VolunteersController.update');
+    Route.delete('/:volunteer_id', 'VolunteersController.destroy');
   }).prefix('/voluntary')
 
 }).prefix('/tenants')//.middleware('tenantHandler')
