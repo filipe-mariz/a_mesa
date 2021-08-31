@@ -4,6 +4,12 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
+Route.group(() => {
+  Route.group(() => {
+    Route.get('/', 'VolunteersController.index')
+  }).prefix('voluntary')
+
+}).prefix('/tenants').middleware('tenantHandler')
 
 /* Route.group(() => {
   Route.group(() => {
