@@ -70,6 +70,39 @@ export default class VolunteersController {
     return volunteer;
   }
 
+  public async updatePassword({ request, response }) {
+    Volunteer.connection = request.tenantConnection;
+
+    const requiredFields = ['password', 'passwordConfirmation', 'email']
+
+    const data = request.only(requiredFields)
+
+    for (const field of requiredFields) {
+      if (!data[field]) {
+        return response.status(400).json({
+          MissingParamError: `MISSING PROPERTY ${field} ON BODY`,
+          Solution: 'Adding this field to the body may solve the problem',
+        })
+      }
+    }
+
+    if (data.password !== data.passwordConfirmation) {
+      return response.status(400).json({
+        InvalidParamError: `INVALID PROPERTY passwordConfirmation ON BODY`,
+        Solution:
+          'The password and passwordConfirmation did not match, are you sure that they are the same?',
+      })
+    }
+
+    const volunteer = await Volunteer.findByOrFail('email', data.email);
+
+    volunteer.password = data.password;
+
+    await volunteer.save();
+
+    return volunteer;
+  }
+
   public async destroy({ request, params, response }) {
     Volunteer.connection = request.tenantConnection;
 
