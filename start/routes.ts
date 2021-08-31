@@ -10,6 +10,7 @@ Route.group(() => {
     Route.post('/', 'VolunteersController.register');
     Route.get('/:volunteer_id', 'VolunteersController.show');
     Route.put('/:volunteer_id', 'VolunteersController.update');
+    Route.put('/update-password/:volunteer_id', 'VolunteersController.updatePassword');
     Route.delete('/:volunteer_id', 'VolunteersController.destroy');
   }).prefix('/voluntary')
 
