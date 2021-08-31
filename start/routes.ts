@@ -7,9 +7,10 @@ Route.get('/', async () => {
 Route.group(() => {
   Route.group(() => {
     Route.get('/', 'VolunteersController.index')
+    Route.post('/', 'VolunteersController.register')
   }).prefix('voluntary')
 
-}).prefix('/tenants').middleware('tenantHandler')
+}).prefix('/tenants')//.middleware('tenantHandler')
 
 /* Route.group(() => {
   Route.group(() => {
