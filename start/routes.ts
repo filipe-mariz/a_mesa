@@ -1,6 +1,11 @@
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.group(() => {
+Route.get('/', async () => {
+  return { hello: 'world' }
+})
+
+
+/* Route.group(() => {
   Route.group(() => {
     Route.post('/', 'VoluntariesController.register')
     Route.get('/', 'VoluntariesController.index')
@@ -9,6 +14,6 @@ Route.group(() => {
     Route.put('/:id', 'VoluntariesController.update')
     Route.put('/update-password/:id', 'VoluntariesController.updatePassword')
   }).prefix('/voluntary')
-}).prefix('/tenants').middleware('tenantHandler')
+}).prefix('/tenants').middleware('tenantHandler') */
 
 Route.post('/', 'VolunteersController.register')
