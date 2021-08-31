@@ -8,7 +8,7 @@ Route.group(() => {
   Route.group(() => {
     Route.get('/', 'VolunteersController.index')
     Route.post('/', 'VolunteersController.register')
-  }).prefix('voluntary')
+  }).prefix('/voluntary')
 
 }).prefix('/tenants')//.middleware('tenantHandler')
 
