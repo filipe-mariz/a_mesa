@@ -2,7 +2,6 @@ import uuid from 'uuid/v4'
 import Hash from '@ioc:Adonis/Core/Hash'
 import { DateTime } from 'luxon'
 import { BaseModel, beforeCreate, beforeSave, column } from '@ioc:Adonis/Lucid/Orm'
-import Voluntary from './Voluntary'
 
 export default class Volunteer extends BaseModel {
   public static connection = 'pg'
@@ -36,14 +35,14 @@ export default class Volunteer extends BaseModel {
   public updatedAt: DateTime
 
   @beforeCreate()
-  public static assignUuid(voluntary: Voluntary) {
-    voluntary.id = uuid()
+  public static assignUuid(volunteers: Volunteer) {
+    volunteers.id = uuid()
   }
 
   @beforeSave()
-  public static async hashPassword(voluntary: Voluntary) {
-    if (voluntary.$dirty.password) {
-      voluntary.password = await Hash.hash(voluntary.password)
+  public static async hashPassword(volunteer: Volunteer) {
+    if (volunteer.$dirty.password) {
+      volunteer.password = await Hash.hash(volunteer.password)
     }
   }
 }
