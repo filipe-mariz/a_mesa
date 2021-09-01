@@ -2,6 +2,7 @@
 import Volunteer from "App/Models/Volunteer";
 import { GoogleCalendarHandler } from 'App/Services/Calendar/google-calendar-handler'
 import Cpf from "App/validators/cpf.validator";
+import RegisterEmail from 'App/Services/emails/register.email'
 
 export default class VolunteersController {
   public async index ({ request }) {
@@ -55,6 +56,9 @@ export default class VolunteersController {
     Volunteer.connection = request.tenantConnection;
 
     const volunteer = await Volunteer.create(modelCreationData)
+
+    const email = new RegisterEmail();
+    email.registerEmail(data.email)
 
     return volunteer
   }
