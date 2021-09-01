@@ -1,5 +1,7 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Volunteer from "App/Models/Volunteer";
+import { GoogleCalendarHandler } from 'App/Services/Calendar/google-calendar-handler'
+import Cpf from "App/validators/cpf.validator";
 
 export default class VolunteersController {
   public async index ({ request }) {
@@ -38,6 +40,15 @@ export default class VolunteersController {
         InvalidParamError: `INVALID PROPERTY passwordConfirmation ON BODY`,
         Solution:
           'The password and passwordConfirmation did not match, are you sure that they are the same?',
+      })
+    }
+
+    const cpf = new Cpf()
+    const validator = await cpf.cpfValidator(data.cpf);
+    if (validator === false) {
+      return response.status(400).json({
+        message: 'CPF is not valid',
+        solution: 'set a valid CPF'
       })
     }
 
@@ -101,6 +112,30 @@ export default class VolunteersController {
     await volunteer.save();
 
     return volunteer;
+  }
+
+  public async createEventOnCalendar({ request, response }) {
+    const requiredFields = ['calendarEvent']
+
+    const data = request.only(requiredFields)
+
+    for (const field of requiredFields) {
+      if (!data[field]) {
+        return response.status(400).json({
+          MissingParamError: `MISSING PROPERTY ${field} ON BODY`,
+          Solution: 'Adding this field to the body may solve the problem',
+        })
+      }
+    }
+
+    const { calendarEvent } = data
+
+    const googleCalendarHandler = new GoogleCalendarHandler()
+    await googleCalendarHandler.createEventOnCalendar(calendarEvent)
+
+    return response.status(200).json({
+      message: 'Event created successfully',
+    })
   }
 
   public async destroy({ request, params, response }) {
