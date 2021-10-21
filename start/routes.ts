@@ -20,7 +20,7 @@ Route.group(() => {
     Route.get('/:needy_id', 'NeediesController.show');
     Route.put('/:needy_id', 'NeediesController.update');
     Route.put('/update-password/:needy_id', 'NeediesController.updatePassword');
-    Route.put('/update-password/:needy_id', 'NeediesController.updatePassword');
+    Route.delete('/:needy_id', 'NeediesController.destroy');
   }).prefix('/needy')
 
 }).prefix('/tenants').middleware('tenantHandler')
