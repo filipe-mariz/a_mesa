@@ -11,7 +11,7 @@ export default class Needy extends BaseModel {
   public name: string
 
   @column()
-  public whatsApp: string
+  public whatsapp: string
 
   @column()
   public password: string
