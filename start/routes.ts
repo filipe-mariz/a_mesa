@@ -12,9 +12,18 @@ Route.group(() => {
     Route.put('/:volunteer_id', 'VolunteersController.update');
     Route.put('/update-password/:volunteer_id', 'VolunteersController.updatePassword');
     Route.delete('/:volunteer_id', 'VolunteersController.destroy');
-  }).prefix('/voluntary')
+  }).prefix('/voluntary');
 
-}).prefix('/tenants')//.middleware('tenantHandler')
+  Route.group(() => {
+    Route.get('/', 'NeediesController.index');
+    Route.post('/', 'NeediesController.register');
+    Route.get('/:needy_id', 'NeediesController.show');
+    Route.put('/:needy_id', 'NeediesController.update');
+    Route.put('/update-password/:needy_id', 'NeediesController.updatePassword');
+    Route.put('/update-password/:needy_id', 'NeediesController.updatePassword');
+  }).prefix('/needy')
+
+}).prefix('/tenants').middleware('tenantHandler')
 
 
 Route.post('/', 'VolunteersController.register')
