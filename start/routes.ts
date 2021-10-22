@@ -23,7 +23,9 @@ Route.group(() => {
     Route.delete('/:needy_id', 'NeediesController.destroy');
   }).prefix('/needy')
 
+  Route.group(() => {
+    Route.post('/voluntary', 'LoginController.volunteer')
+    Route.post('/needy', 'LoginController.needy')
+  }).prefix('/login')
+
 }).prefix('/tenants').middleware('tenantHandler')
-
-
-Route.post('/', 'VolunteersController.register')
