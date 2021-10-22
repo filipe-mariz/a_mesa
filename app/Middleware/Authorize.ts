@@ -1,6 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import VoluntaryToken from 'App/Models/VoluntaryToken'
-import NeedyToken from 'App/Models/NeedyToken'
+import ApiToken from 'App/Models/ApiToken'
 
 export default class Authorize {
   public async handle({ request, response }: HttpContextContract, next: () => Promise<void>) {
@@ -15,15 +14,13 @@ export default class Authorize {
     )
 
     if (tenantConnection) {
-      VoluntaryToken.connection = tenantConnection
-      NeedyToken.connection = tenantConnection
+      ApiToken.connection = tenantConnection
     }
 
-    const voluntaryToken = await VoluntaryToken.findBy('token', authToken)
-    const needyToken = await NeedyToken.findBy('token', authToken)
-
+    const voluntaryToken = await ApiToken.findBy('token', authToken)
+    
     response.abortIf(
-      !voluntaryToken && !needyToken,
+      !voluntaryToken,
       { message: 'Authorization Token not valid' },
       401
     )
