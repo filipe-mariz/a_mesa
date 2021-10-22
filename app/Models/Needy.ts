@@ -16,6 +16,12 @@ export default class Needy extends BaseModel {
   @column()
   public password: string
 
+  @column()
+  public born: string
+
+  @column()
+  public rg: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
