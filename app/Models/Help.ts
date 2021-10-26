@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import Needy from './Needy';
+import Volunteer from './Volunteer';
 
 export default class Help extends BaseModel {
   @column({ isPrimary: true })
@@ -16,13 +17,19 @@ export default class Help extends BaseModel {
   public description: string;
 
   @column()
-  public adress: string;
+  public adress: string; 
 
   @column()
   public city: string;
 
   @column()
   public state: string;
+
+  @column()
+  public volunteer_id: string;
+
+  @column()
+  public status: string;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -32,4 +39,7 @@ export default class Help extends BaseModel {
 
   @hasOne(() => Needy)
   public needy: HasOne<typeof Needy>
+
+  @hasOne(() => Volunteer)
+  public volunteer: HasOne<typeof Volunteer>
 }
