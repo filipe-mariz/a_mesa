@@ -1,5 +1,6 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Help from "App/Models/Help";
+import Needy from "App/Models/Needy";
 
 export default class HelpsController {
   public async index({ request }) {
@@ -18,6 +19,7 @@ export default class HelpsController {
       'adress',
       'city',
       'state',
+      'status'
     ];
 
     const modelCreationData = request.all();
@@ -30,6 +32,13 @@ export default class HelpsController {
           Solution: 'Adding this field to the body may solve the problem',
         })
       }
+    }
+
+    const needy = await Needy.findByOrFail('id', data.needy_id);
+    if(!needy) {
+      return response.status(400).json({
+        message: 'User not found'
+      })
     }
 
     Help.connection = request.tenantConnection;
