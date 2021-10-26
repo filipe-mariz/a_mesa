@@ -26,6 +26,14 @@ Route.group(() => {
   Route.group(() => {
     Route.post('/voluntary', 'LoginController.volunteer')
     Route.post('/needy', 'LoginController.needy')
-  }).prefix('/login')
+  }).prefix('/login');
+
+  Route.group(() => {
+    Route.get('/', 'HelpsController.index');
+    Route.post('/', 'HelpsController.register');
+    Route.get('/:help_id', 'HelpsController.show');
+    Route.put('/:help_id', 'HelpsController.update');
+    Route.delete('/:help_id', 'HelpsController.destroy');
+  }).prefix('help').middleware('authorize');
 
 }).prefix('/tenants').middleware('tenantHandler')
