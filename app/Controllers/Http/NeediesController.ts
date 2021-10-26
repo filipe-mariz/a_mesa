@@ -11,7 +11,14 @@ export default class NeediesController {
   }
 
   public async register({ request, response }) {
-    const requiredFields = [ 'name', 'whatsapp', 'password', 'passwordConfirmation'];
+    const requiredFields = [ 
+      'name', 
+      'whatsapp', 
+      'password', 
+      'passwordConfirmation', 
+      'born', 
+      'rg'
+    ];
 
     const modelCreationData = request.except([ 'passwordConfirmation' ])
     const data = request.only(requiredFields)
@@ -171,5 +178,4 @@ export default class NeediesController {
       message: 'Needy deleted successfully'
     })
   }
-
 }

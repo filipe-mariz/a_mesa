@@ -9,6 +9,8 @@ export default class Needies extends BaseSchema {
       table.string('name').notNullable();
       table.string('whatsapp').notNullable().unique();
       table.string('password').notNullable();
+      table.string('born').notNullable();
+      table.string('rg').notNullable();
       table.timestamps(true)
     })
   }

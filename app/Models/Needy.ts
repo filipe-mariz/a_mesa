@@ -1,7 +1,8 @@
 import uuid from 'uuid/v4'
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { BaseModel, beforeCreate, beforeSave, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeCreate, beforeSave, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import Help from './Help'
 
 export default class Needy extends BaseModel {
   @column({ isPrimary: true })
@@ -15,6 +16,12 @@ export default class Needy extends BaseModel {
 
   @column()
   public password: string
+
+  @column()
+  public born: string
+
+  @column()
+  public rg: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -34,5 +41,7 @@ export default class Needy extends BaseModel {
       needy.password = await Hash.hash(needy.password)
     }
   }
-}
 
+  @hasMany(() => Help)
+  public help: HasMany<typeof Help>
+}
