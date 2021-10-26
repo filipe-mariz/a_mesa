@@ -7,11 +7,16 @@ export default class Helps extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').index().primary();
       table.string('needy_id').notNullable();
-      table.enum('help_type', ['fisico', 'mental', 'espiritual']).defaultTo('espiritual').notNullable()
+      table.enum('help_type', ['fisico', 'mental', 'espiritual'])
+        .defaultTo('espiritual')
+        .notNullable();
       table.string('description').notNullable();
       table.string('adress').notNullable();
       table.string('city').notNullable();
       table.string('state').notNullable();
+      table.enum('status', ['Pendente', 'Agendado', 'Concluido'])
+        .defaultTo('Pendendte')
+        .notNullable();
       table.timestamps(true)
     })
   }
