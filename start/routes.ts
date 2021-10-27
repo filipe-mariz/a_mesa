@@ -50,6 +50,7 @@ Route.group(() => {
   Route.group(() => {
     Route.group(() => {
       Route.post('/', 'ProfessionalVolunteersController.register')
+      Route.get('/', 'ProfessionalVolunteersController.index')
     }).prefix('/data')
   }).prefix('/professional')
 

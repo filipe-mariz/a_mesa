@@ -56,8 +56,16 @@ export default class ProfessionalVolunteersController {
 
     const professional = await ProfessionalVolunteer.create(modelCreationData);
 
-    //const email = new RegisterEmail();
-    //email.registerEmail(data.email)
+    const email = new RegisterEmail();
+    email.registerEmail(data.email)
+
+    return professional
+  }
+
+  public async index({ request }) {
+    ProfessionalVolunteer.connection = request.tenantConnection;
+
+    const professional = await ProfessionalVolunteer.all();
 
     return professional
   }
