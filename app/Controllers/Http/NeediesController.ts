@@ -55,6 +55,16 @@ export default class NeediesController {
     return needy;
   }
 
+  public async showRequestForHelp({ request, params }) {
+    Needy.connection = request.tenantConnection;
+
+    const help = await Needy.query()
+      .where('id', '=', params.needy_id)
+      .preload('help');
+
+    return help;
+  }
+
   public async update({ request, params }) {
     Needy.connection = request.tenantConnection;
 
