@@ -69,4 +69,16 @@ export default class VolunteerHelpersController {
 
     return volunteerHelper;
   }
+
+  public async destroy({ request, params, response }) {
+    VolunteerHelper.connection = request.tenantConnection;
+
+    const volunteerHelper = await VolunteerHelper.findOrFail(params.volunteerHelper_id);
+
+    await volunteerHelper.delete();
+
+    return response.status(200).json({
+      message: 'Help deleted successfully'
+    })
+  }
 }
