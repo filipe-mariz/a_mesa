@@ -52,6 +52,7 @@ Route.group(() => {
       Route.post('/', 'ProfessionalVolunteersController.register');
       Route.get('/', 'ProfessionalVolunteersController.index');
       Route.get('/:professional_id', 'ProfessionalVolunteersController.show');
+      Route.put('/:professional_id', 'ProfessionalVolunteersController.update');
     }).prefix('/data')
   }).prefix('/professional')
 

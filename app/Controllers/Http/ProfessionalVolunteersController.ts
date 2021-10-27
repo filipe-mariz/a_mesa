@@ -73,7 +73,21 @@ export default class ProfessionalVolunteersController {
   public async show({ request, params }) {
     ProfessionalVolunteer.connection = request.tenantConnection;
 
-    const professional = ProfessionalVolunteer.findOrFail(params.professional_id);
+    const professional = await ProfessionalVolunteer.findOrFail(params.professional_id);
+
+    return professional;
+  }
+
+  public async update({ request, params }) {
+    ProfessionalVolunteer.connection = request.tenantConnection;
+
+    const data = request.except([ 'passwordConfirmation' ]);
+
+    const professional = await ProfessionalVolunteer.findOrFail(params.professional_id);
+
+    professional.merge(data);
+
+    await professional.save();
 
     return professional;
   }
