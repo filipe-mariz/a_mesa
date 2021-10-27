@@ -2,7 +2,6 @@ import uuid from 'uuid/v4'
 import { DateTime } from 'luxon'
 import { BaseModel, beforeCreate, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import Needy from './Needy';
-import Volunteer from './Volunteer';
 
 export default class Help extends BaseModel {
   public static connection = 'pg'
