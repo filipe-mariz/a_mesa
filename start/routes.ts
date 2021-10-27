@@ -36,4 +36,9 @@ Route.group(() => {
     Route.delete('/:help_id', 'HelpsController.destroy');
   }).prefix('help')//.middleware('authorize');
 
+  Route.group(() => {
+    Route.post('/', 'VolunteerHelpersController.register');
+    Route.get('/', 'VolunteerHelpersController.index');
+  }).prefix('/volunteer-helper')//.middleware('authorize')
+
 }).prefix('/tenants').middleware('tenantHandler')
