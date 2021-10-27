@@ -71,6 +71,31 @@ export default class HelpsController {
     return help;
   }
 
+  public async updateStatus({ request, params, response }) {
+    Help.connection = request.tenantConnection;
+
+    const requiredFields = ['status'];
+
+    const data = request.only(requiredFields)
+
+    for (const field of requiredFields) {
+      if (!data[field]) {
+        return response.status(400).json({
+          MissingParamError: `MISSING PROPERTY ${field} ON BODY`,
+          Solution: 'Adding this field to the body may solve the problem',
+        })
+      }
+    }
+
+    const help = await Help.findOrFail(params.help_id);
+
+    help.merge(data);
+
+    await help.save();
+
+    return help;
+  }
+
   public async destroy({ request, response, params }) {
     Help.connection = request.tenantConnection;
 
