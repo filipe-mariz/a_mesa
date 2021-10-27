@@ -39,6 +39,7 @@ Route.group(() => {
   Route.group(() => {
     Route.post('/', 'VolunteerHelpersController.register');
     Route.get('/', 'VolunteerHelpersController.index');
+    Route.get('/:volunteerHelper_id', 'VolunteerHelpersController.show');
   }).prefix('/volunteer-helper')//.middleware('authorize')
 
 }).prefix('/tenants').middleware('tenantHandler')
