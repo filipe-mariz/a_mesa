@@ -4,7 +4,7 @@ import Help from "App/Models/Help";
 import Volunteer from "App/Models/Volunteer";
 
 export default class VolunteerHelpersController {
-  public async index({ request, response }) {
+  public async index({ request }) {
     VolunteerHelper.connection = request.tenantConnection;
 
     const volunteerHelper = await VolunteerHelper.all();
