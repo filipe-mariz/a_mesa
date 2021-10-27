@@ -15,9 +15,10 @@ Route.group(() => {
   }).prefix('/voluntary');
 
   Route.group(() => {
-    Route.get('/', 'NeediesController.index');
     Route.post('/', 'NeediesController.register');
+    Route.get('/', 'NeediesController.index');
     Route.get('/:needy_id', 'NeediesController.show');
+    Route.get('/request-help/:needy_id', 'NeediesController.showRequestForHelp');
     Route.put('/:needy_id', 'NeediesController.update');
     Route.put('/update-password/:needy_id', 'NeediesController.updatePassword');
     Route.delete('/:needy_id', 'NeediesController.destroy');
