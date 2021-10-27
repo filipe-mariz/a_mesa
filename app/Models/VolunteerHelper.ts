@@ -14,6 +14,9 @@ export default class VolunteerHelper extends BaseModel {
   public help_id: string;
 
   @column()
+  public volunteer_id: string;
+
+  @column()
   public date_of_help: string;
 
   @column()
