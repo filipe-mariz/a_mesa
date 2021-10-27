@@ -34,7 +34,7 @@ Route.group(() => {
     Route.get('/:help_id', 'HelpsController.show');
     Route.put('/:help_id', 'HelpsController.update');
     Route.delete('/:help_id', 'HelpsController.destroy');
-  }).prefix('help')//.middleware('authorize');
+  }).prefix('/help')//.middleware('authorize');
 
   Route.group(() => {
     Route.post('/', 'VolunteerHelpersController.register');
