@@ -71,6 +71,16 @@ export default class VolunteersController {
     return volunteer
   }
 
+  public async showRequestForHelp({ request, params }) {
+    Volunteer.connection = request.tenantConnection;
+
+    const help = await Volunteer.query()
+      .where('id', '=', params.volunteer_id)
+      .preload('volunteerHelper');
+    
+    return help;
+  }
+
   public async update({ request, params }) {
     Volunteer.connection = request.tenantConnection;
 
