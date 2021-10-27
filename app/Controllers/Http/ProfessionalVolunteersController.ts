@@ -91,4 +91,16 @@ export default class ProfessionalVolunteersController {
 
     return professional;
   }
+
+  public async destroy({ request, response, params }) {
+    ProfessionalVolunteer.connection = request.tenantConnection;
+
+    const professional = await ProfessionalVolunteer.findOrFail(params.professional_id)
+
+    await professional.delete();
+
+    return response.status(200).json({
+      message: 'Professional deleted successfully',
+    })
+  }
 }

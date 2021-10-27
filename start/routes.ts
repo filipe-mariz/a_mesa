@@ -53,6 +53,7 @@ Route.group(() => {
       Route.get('/', 'ProfessionalVolunteersController.index');
       Route.get('/:professional_id', 'ProfessionalVolunteersController.show');
       Route.put('/:professional_id', 'ProfessionalVolunteersController.update');
+      Route.delete('/:professional_id', 'ProfessionalVolunteersController.destroy');
     }).prefix('/data')
   }).prefix('/professional')
 
