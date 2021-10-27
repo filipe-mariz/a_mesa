@@ -55,4 +55,18 @@ export default class VolunteerHelpersController {
 
     return volunteerHelper;
   }
+
+  public async update({ request, params }) {
+    VolunteerHelper.connection = request.tenantConnection;
+
+    const data = request.all();
+
+    const volunteerHelper = await VolunteerHelper.findOrFail(params.volunteerHelper_id);
+
+    volunteerHelper.merge(data);
+
+    await volunteerHelper.save();
+
+    return volunteerHelper;
+  }
 }
