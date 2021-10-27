@@ -41,6 +41,7 @@ Route.group(() => {
     Route.get('/', 'VolunteerHelpersController.index');
     Route.get('/:volunteerHelper_id', 'VolunteerHelpersController.show');
     Route.put('/:volunteerHelper_id', 'VolunteerHelpersController.update');
+    Route.delete('/:volunteerHelper_id', 'VolunteerHelpersController.destroy');
   }).prefix('/volunteer-helper')//.middleware('authorize')
 
 }).prefix('/tenants').middleware('tenantHandler')
