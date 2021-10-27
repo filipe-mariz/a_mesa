@@ -31,6 +31,12 @@ export default class Help extends BaseModel {
   @column()
   public status: string;
 
+  @column()
+  public lat: string;
+
+  @column()
+  public long: string;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
