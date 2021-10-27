@@ -69,4 +69,12 @@ export default class ProfessionalVolunteersController {
 
     return professional
   }
+
+  public async show({ request, params }) {
+    ProfessionalVolunteer.connection = request.tenantConnection;
+
+    const professional = ProfessionalVolunteer.findOrFail(params.professional_id);
+
+    return professional;
+  }
 }

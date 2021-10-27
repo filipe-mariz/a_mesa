@@ -49,8 +49,9 @@ Route.group(() => {
 
   Route.group(() => {
     Route.group(() => {
-      Route.post('/', 'ProfessionalVolunteersController.register')
-      Route.get('/', 'ProfessionalVolunteersController.index')
+      Route.post('/', 'ProfessionalVolunteersController.register');
+      Route.get('/', 'ProfessionalVolunteersController.index');
+      Route.get('/:professional_id', 'ProfessionalVolunteersController.show');
     }).prefix('/data')
   }).prefix('/professional')
 
