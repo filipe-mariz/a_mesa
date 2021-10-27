@@ -8,7 +8,9 @@
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
-    "docker": "docker run -p 5433:5432 -e POSTGRES_PASSWORD=1234 postgres"
+    "docker": "docker run -p 5433:5432 -e POSTGRES_PASSWORD=1234 postgres",
+    "run": "node ace migration:run",
+    "back": "node ace migration:rollback"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^3.0.0",
