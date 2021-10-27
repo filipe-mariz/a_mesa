@@ -9,6 +9,7 @@ Route.group(() => {
     Route.get('/', 'VolunteersController.index');
     Route.post('/', 'VolunteersController.register');
     Route.get('/:volunteer_id', 'VolunteersController.show');
+    Route.get('/request-help/:volunteer_id', 'VolunteersController.showRequestForHelp');
     Route.put('/:volunteer_id', 'VolunteersController.update');
     Route.put('/update-password/:volunteer_id', 'VolunteersController.updatePassword');
     Route.delete('/:volunteer_id', 'VolunteersController.destroy');
