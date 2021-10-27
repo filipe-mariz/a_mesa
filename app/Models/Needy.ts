@@ -32,6 +32,8 @@ export default class Needy extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  @hasMany(() => Help)
+  public help: HasMany<typeof Help>
 
   @beforeCreate()
   public static assignUuid(needy: Needy) {
@@ -44,7 +46,4 @@ export default class Needy extends BaseModel {
       needy.password = await Hash.hash(needy.password)
     }
   }
-
-  @hasMany(() => Help)
-  public help: HasMany<typeof Help>
 }
