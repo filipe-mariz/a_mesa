@@ -40,6 +40,7 @@ Route.group(() => {
     Route.post('/', 'VolunteerHelpersController.register');
     Route.get('/', 'VolunteerHelpersController.index');
     Route.get('/:volunteerHelper_id', 'VolunteerHelpersController.show');
+    Route.put('/:volunteerHelper_id', 'VolunteerHelpersController.update');
   }).prefix('/volunteer-helper')//.middleware('authorize')
 
 }).prefix('/tenants').middleware('tenantHandler')
