@@ -19,7 +19,9 @@ export default class HelpsController {
       'adress',
       'city',
       'state',
-      'status'
+      'status',
+      'lat',
+      'long',
     ];
 
     const modelCreationData = request.all();
