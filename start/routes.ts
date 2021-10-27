@@ -9,15 +9,17 @@ Route.group(() => {
     Route.get('/', 'VolunteersController.index');
     Route.post('/', 'VolunteersController.register');
     Route.get('/:volunteer_id', 'VolunteersController.show');
+    Route.get('/request-help/:volunteer_id', 'VolunteersController.showRequestForHelp');
     Route.put('/:volunteer_id', 'VolunteersController.update');
     Route.put('/update-password/:volunteer_id', 'VolunteersController.updatePassword');
     Route.delete('/:volunteer_id', 'VolunteersController.destroy');
   }).prefix('/voluntary');
 
   Route.group(() => {
-    Route.get('/', 'NeediesController.index');
     Route.post('/', 'NeediesController.register');
+    Route.get('/', 'NeediesController.index');
     Route.get('/:needy_id', 'NeediesController.show');
+    Route.get('/request-help/:needy_id', 'NeediesController.showRequestForHelp');
     Route.put('/:needy_id', 'NeediesController.update');
     Route.put('/update-password/:needy_id', 'NeediesController.updatePassword');
     Route.delete('/:needy_id', 'NeediesController.destroy');
