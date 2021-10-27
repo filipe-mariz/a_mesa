@@ -1,7 +1,8 @@
 import uuid from 'uuid/v4'
 import Hash from '@ioc:Adonis/Core/Hash'
 import { DateTime } from 'luxon'
-import { BaseModel, beforeCreate, beforeSave, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeCreate, beforeSave, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import VolunteerHelper from './VolunteerHelper'
 
 export default class Volunteer extends BaseModel {
   public static connection = 'pg'
@@ -33,6 +34,9 @@ export default class Volunteer extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => VolunteerHelper)
+  public volunteerHelper: HasMany<typeof VolunteerHelper>
 
   @beforeCreate()
   public static assignUuid(volunteers: Volunteer) {
