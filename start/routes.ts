@@ -47,4 +47,14 @@ Route.group(() => {
     Route.delete('/:volunteerHelper_id', 'VolunteerHelpersController.destroy');
   }).prefix('/volunteer-helper')//.middleware('authorize')
 
+  Route.group(() => {
+    Route.group(() => {
+      Route.post('/', 'ProfessionalVolunteersController.register');
+      Route.get('/', 'ProfessionalVolunteersController.index');
+      Route.get('/:professional_id', 'ProfessionalVolunteersController.show');
+      Route.put('/:professional_id', 'ProfessionalVolunteersController.update');
+      Route.delete('/:professional_id', 'ProfessionalVolunteersController.destroy');
+    }).prefix('/data')
+  }).prefix('/professional')
+
 }).prefix('/tenants').middleware('tenantHandler')
