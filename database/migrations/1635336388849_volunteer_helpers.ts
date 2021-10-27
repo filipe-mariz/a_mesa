@@ -7,6 +7,7 @@ export default class VolunteerHelpers extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').index().primary();
       table.string('help_id').notNullable();
+      table.string('volunteer_id').notNullable();
       table.string('date_of_help').notNullable();
       table.string('description').notNullable();
       table.string('image_link').notNullable();
