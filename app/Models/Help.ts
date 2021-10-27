@@ -5,6 +5,9 @@ import Needy from './Needy';
 import Volunteer from './Volunteer';
 
 export default class Help extends BaseModel {
+  public static connection = 'pg'
+  public static selfAssignPrimaryKey = true
+  
   @column({ isPrimary: true })
   public id: string
 

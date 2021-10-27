@@ -5,6 +5,9 @@ import { BaseModel, beforeCreate, beforeSave, column, HasMany, hasMany } from '@
 import Help from './Help'
 
 export default class Needy extends BaseModel {
+  public static connection = 'pg'
+  public static selfAssignPrimaryKey = true
+  
   @column({ isPrimary: true })
   public id: string
 
