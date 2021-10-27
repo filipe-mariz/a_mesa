@@ -11,7 +11,7 @@ export default class Help extends BaseModel {
   public id: string
 
   @column()
-  public needy_id: string
+  public needyId: string
 
   @column()
   public help_type: string;
