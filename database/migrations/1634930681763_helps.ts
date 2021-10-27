@@ -12,6 +12,8 @@ export default class Helps extends BaseSchema {
       table.string('adress').notNullable();
       table.string('city').notNullable();
       table.string('state').notNullable();
+      table.string('lat').notNullable();
+      table.string('long').notNullable();
       table.enum('status', ['Pendente', 'Agendado', 'Concluido']).defaultTo('Pendendte')
       table.timestamps(true)
     })
