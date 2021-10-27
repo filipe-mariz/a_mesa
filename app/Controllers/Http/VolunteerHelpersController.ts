@@ -1,6 +1,7 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import VolunteerHelper from "App/Models/VolunteerHelper";
 import Help from "App/Models/Help";
+import Volunteer from "App/Models/Volunteer";
 
 export default class VolunteerHelpersController {
   public async index({ request, response }) {
@@ -21,7 +22,7 @@ export default class VolunteerHelpersController {
     ]
 
     const modelCreationData = request.all();
-    const data = request.only(modelCreationData);
+    const data = request.only(requiredFields);
 
     for(const field of requiredFields) {
       if(!data[field]) {
@@ -32,10 +33,11 @@ export default class VolunteerHelpersController {
       }
     }
 
+    const volunteer = await Volunteer.findByOrFail('id', data.volunteer_id)
     const help = await Help.findByOrFail('id', data.help_id);
-    if(!help) {
+    if((!help) || (!volunteer)) {
       return response.status(400).json({
-        message: 'User not found'
+        message: 'Is not possible'
       })
     }
 
@@ -44,6 +46,5 @@ export default class VolunteerHelpersController {
     const volunteerHelper = await VolunteerHelper.create(modelCreationData);
 
     return volunteerHelper;
-
   }
 }
