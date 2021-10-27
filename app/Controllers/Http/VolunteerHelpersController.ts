@@ -34,12 +34,20 @@ export default class VolunteerHelpersController {
     }
 
     const volunteer = await Volunteer.findByOrFail('id', data.volunteer_id)
+    
     const help = await Help.findByOrFail('id', data.help_id);
     if((!help) || (!volunteer)) {
       return response.status(400).json({
         message: 'Is not possible'
       })
     }
+
+    const newStatus = { "status": "Concluido" };
+
+    help.merge(newStatus);
+
+    await help.save();
+
 
     VolunteerHelper.connection = request.tenantConnection;
 
